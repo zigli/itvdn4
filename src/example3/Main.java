@@ -4,7 +4,7 @@ enum Company {
     GOOGLE(100), ITVDN(1000), SKYNET(10);
     int value;
 
-    Company(int value) {
+    private Company(int value) {
         this.value = value;
     }
 

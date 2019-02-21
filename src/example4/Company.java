@@ -1,9 +1,34 @@
 package example4;
 
 public enum Company {
-    ITVDN(1000),
-    GOOGLE(100),
-    SKYNET(10);
+    ITVDN(1000){
+        @Override
+        public int getValue() {
+            return 10 + this.value;
+        }
+
+        @Override
+        public String getCurrency() {
+            return "dollars";
+        }
+    },
+    GOOGLE(100){
+        @Override
+        public String getCurrency() {
+            return "cents";
+        }
+    },
+    SKYNET(10){
+        @Override
+        public String toString() {
+            return "Company: " + super.toString();
+        }
+
+        @Override
+        public String getCurrency() {
+            return "euros";
+        }
+    };
 
     int value;
 
@@ -22,9 +47,3 @@ public enum Company {
 
     public abstract String getCurrency();
 }
-
-
-//public class Company {
-//
-//
-//}

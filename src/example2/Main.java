@@ -1,5 +1,7 @@
 package example2;
 
+import java.util.Random;
+
 enum Day {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }

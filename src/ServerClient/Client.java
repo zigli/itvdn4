@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) {
-        try (Socket socket = new Socket("127.0.0.1", 5000)){
+        try (Socket socket = new Socket("127.0.0.1", 5000)) {
+            socket.setSoTimeout(5000);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
 
             Scanner scanner = new Scanner(System.in);
             String echoStrint;
@@ -25,11 +27,12 @@ public class Client {
                     response = reader.readLine();
                     System.out.println("Response is " + response);
                 }
-            }while (!echoStrint.equals("exit"));
+            } while (!echoStrint.equals("exit"));
 
-
+        }catch (SocketTimeoutException e){
+            System.out.println("The socke timed out");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Cluent errot: "+ e.getMessage());
         }
     }
 }
